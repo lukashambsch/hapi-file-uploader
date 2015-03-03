@@ -5,7 +5,7 @@ var describe = lab.describe;
 var it = lab.it;
 var expect = Code.expect;
 
-var server = require('../../server.js');
+var server = require('../server.js');
 
 describe('upload/routes', {timeout: 10000}, function () {
 

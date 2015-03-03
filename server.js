@@ -1,9 +1,9 @@
-var Hapi = require('hapi');
-var Good = require('good');
+var hapi = require('hapi');
+var bunyan = require('bunyan');
 
-var routes = require('./lib/upload/routes.js');
+var routes = require('./lib/routes/routes.js');
 
-var server = new Hapi.Server();
+var server = new hapi.Server();
 
 server.connection({ port: 3000 });
 
@@ -16,13 +16,10 @@ server.views({
 });
 
 server.register({
-  register: Good,
+  register: require('hapi-bunyan'),
   options: {
-    reporters: [{
-      reporter: require('good-console'),
-      args:[{ log: '*', response: '*' }]
-    }]
-  }
+    logger: bunyan.createLogger({ name: 'test', level: 'debug' }),
+  },
 }, function (err) {
     if (err) {
       throw err;
